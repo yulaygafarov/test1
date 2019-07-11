@@ -58,13 +58,13 @@ public class IPHelperTest {
 	@Test
 	public void testValidationWhenCorrect() {
 		String ip = "234.145.0.155";
-		assertTrue(IPHelper.checkValidIP(ip));
+		assertTrue(IPHelper.isValidIp(ip));
 	}
 
 	@Test
-	public void testValidationWhenIncprrect() {
+	public void testValidationWhenIncorrect() {
 		String ip = "234.345.0.155";
-		assertFalse(IPHelper.checkValidIP(ip));
+		assertFalse(IPHelper.isValidIp(ip));
 	}
 
 }
