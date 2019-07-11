@@ -19,7 +19,13 @@ public class IPHelper {
 	}
 
 	public static String intToIp(int ipIntValue) {
-		return null;
+		String[] parts = new String[4];
+		for (int i = 0; i < 4; i++) {
+			parts[i] = String.valueOf(ipIntValue & 0xFF);
+			ipIntValue >>= 8;
+		}
+
+		return parts[3] + "." + parts[2] + "." + parts[1] + "." + parts[0];
 	}
 
 }
