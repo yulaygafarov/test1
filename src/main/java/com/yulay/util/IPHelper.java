@@ -1,11 +1,10 @@
 package com.yulay.util;
 
-import java.util.regex.Pattern;
+import com.google.common.net.InetAddresses;
 
 public class IPHelper {
 	public static boolean isValidIp(String ip) {
-		Pattern PATTERN = Pattern.compile("^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
-		return PATTERN.matcher(ip).matches();
+		return InetAddresses.isInetAddress(ip);
 	}
 
 	public static int ipToInt(String ip) {
