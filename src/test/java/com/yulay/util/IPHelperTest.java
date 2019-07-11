@@ -1,6 +1,8 @@
 package com.yulay.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -52,4 +54,17 @@ public class IPHelperTest {
 		int actual = IPHelper.ipToInt(ip);
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	public void testValidationWhenCorrect() {
+		String ip = "234.145.0.155";
+		assertTrue(IPHelper.checkValidIP(ip));
+	}
+
+	@Test
+	public void testValidationWhenIncprrect() {
+		String ip = "234.345.0.155";
+		assertFalse(IPHelper.checkValidIP(ip));
+	}
+
 }
