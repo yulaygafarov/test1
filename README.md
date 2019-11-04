@@ -1,5 +1,5 @@
 # test1
-Console application that outputs IP-addresses between inputed IP-addresses
+Console application that outputs IP-addresses between two inputed IP-addresses
 
 Тестовое задание: 
 На вход программе задаются два IP адреса, программа перебирает все
