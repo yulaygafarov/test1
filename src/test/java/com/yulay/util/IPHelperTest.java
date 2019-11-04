@@ -1,70 +1,71 @@
 package com.yulay.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class IPHelperTest {
-	@Test
-	public void testIntToIpWhenZero() {
-		int IpIntValue = 0;
-		String expected = "0.0.0.0";
-		String actual = IPHelper.intToIp(IpIntValue);
-		assertEquals(expected, actual);
-	}
+    final String regularIp = "23.54.9.79";
+    final int regularIpIntValue = 389417295;
 
-	@Test
-	public void testIntToIpWhenRegularValue() {
-		int IpIntValue = 389417295;
-		String expected = "23.54.9.79";
-		String actual = IPHelper.intToIp(IpIntValue);
-		assertEquals(expected, actual);
-	}
+    final String maxIp = "255.255.255.255";
+    final int maxIpIntValue = 0xFF_FF_FF_FF;
 
-	@Test
-	public void testIntToIpWhenMaxValue() {
-		int IpIntValue = 0xFF_FF_FF_FF;
-		String expected = "255.255.255.255";
-		String actual = IPHelper.intToIp(IpIntValue);
-		assertEquals(expected, actual);
-	}
+    final String minIp = "0.0.0.0";
+    final int minIpIntValue = 0;
 
-	@Test
-	public void testIpToIntWhenZero() {
-		String ip = "0.0.0.0";
-		int expected = 0;
-		int actual = IPHelper.ipToInt(ip);
-		assertEquals(expected, actual);
-	}
+    final String correctIp = "234.145.0.155";
+    final String incorrectIp = "256.145.0.155";
 
-	@Test
-	public void testIpToIntWhenRegularValue() {
-		String ip = "23.54.9.79";
-		int expected = 389417295;
-		int actual = IPHelper.ipToInt(ip);
-		assertEquals(expected, actual);
-	}
+    @Test
+    public void testIntToIpWhenZero() {
+        int IpIntValue = 0;
+        String actual = IPHelper.intToIpStringView(IpIntValue);
+        assertEquals(minIp, actual);
+    }
 
-	@Test
-	public void testIpToIntWhenMaxValue() {
-		String ip = "255.255.255.255";
-		int expected = 0xFF_FF_FF_FF;
-		int actual = IPHelper.ipToInt(ip);
-		assertEquals(expected, actual);
-	}
+    @Test
+    public void testIntToIpWhenRegularValue() {
+        String ip = IPHelper.intToIpStringView(regularIpIntValue);
+        assertEquals(regularIp, ip);
+    }
 
-	@Test
-	public void testValidationWhenCorrect() {
-		String ip = "234.145.0.155";
-		assertTrue(IPHelper.isValidIp(ip));
-	}
+    @Test
+    public void testIntToIpWhenMaxValue() {
+        String ip = IPHelper.intToIpStringView(maxIpIntValue);
+        assertEquals(maxIp, ip);
+    }
 
-	@Test
-	public void testValidationWhenIncorrect() {
-		String ip = "234.345.0.155";
-		assertFalse(IPHelper.isValidIp(ip));
-	}
+    @Test
+    public void testIpToIntWhenZero() {
+        int ipIntValue = IPHelper.ipToInt(minIp);
+        assertEquals(minIpIntValue, ipIntValue);
+    }
 
+    @Test
+    public void testIpToIntWhenRegularValue() {
+        int ipIntValue = IPHelper.ipToInt(regularIp);
+        assertEquals(regularIpIntValue, ipIntValue);
+    }
+
+    @Test
+    public void testIpToIntWhenMaxValue() {
+        int ipIntValue = IPHelper.ipToInt(maxIp);
+        assertEquals(maxIpIntValue, ipIntValue);
+    }
+
+    @Test
+    public void testValidationWhenCorrect() {
+        assertTrue(IPHelper.isValidIp(correctIp));
+    }
+
+    @Test
+    public void testValidationWhenIncorrect() {
+        assertFalse(IPHelper.isValidIp(incorrectIp));
+    }
+
+    @Test(expected = IpNotValidExeption.class)
+    public void testExceptionWhenIncorrect() {
+        System.out.println(IPHelper.ipToInt(incorrectIp));
+    }
 }

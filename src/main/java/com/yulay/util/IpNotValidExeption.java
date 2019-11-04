@@ -1,10 +1,8 @@
 package com.yulay.util;
 
-public class IpNotValidExeption extends Exception {
-	private static final long serialVersionUID = 1L;
+public class IpNotValidExeption extends RuntimeException {
 
-	public IpNotValidExeption(String message) {
-		super(message);
-	}
-
+    public IpNotValidExeption(String message) {
+        super(message);
+    }
 }

@@ -1,43 +1,36 @@
 package com.yulay;
 
-import java.util.Scanner;
-
 import com.yulay.util.IPHelper;
 
+import java.util.Scanner;
+
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
 
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		System.out.println("Введите два IP-адреса.\nПервый адрес: ");
-		String firstIp = in.nextLine();
-		while (!IPHelper.isValidIp(firstIp)) {
-			System.out.println("Вы ввели IP-адрес не в корректном формате! Вводите в формате \"ххх.ххх.ххх.ххх\"");
-			firstIp = in.nextLine();
-		}
-		System.out.println("Второй адрес: ");
-		String secondIp = in.nextLine();
-		while (!IPHelper.isValidIp(secondIp)) {
-			System.out.println("Вы ввели IP-адрес не в корректном формате! Вводите в формате \"ххх.ххх.ххх.ххх\"");
-			firstIp = in.nextLine();
-		}
+    public static void main(String[] args) {
+        System.out.println("Р’РІРµРґРёС‚Рµ РґРІР° IP-Р°РґСЂРµСЃР°.\nРџРµСЂРІС‹Р№ Р°РґСЂРµСЃ: ");
+        String firstIp = readIpAddress();
 
-		int firstIpIntegerValue = IPHelper.ipToInt(firstIp);
-		int secondIpIntegerValue = IPHelper.ipToInt(secondIp);
-		int min = Math.min(firstIpIntegerValue, secondIpIntegerValue);
-		int max = Math.max(firstIpIntegerValue, secondIpIntegerValue);
-		min++;
-		if (min >= max) {
-			System.out.println("Нет IP-адресов в указанном диапазоне.");
-			return;
-		}
-		int count = 0;
-		while (min < max) {
-			String currentIp = IPHelper.intToIp(min);
-			System.out.println(currentIp);
-			min++;
-			count++;
-		}
-		System.out.println("Всего " + count + " адресов в указанном диапазоне.");
-	}
+        System.out.println("Р’С‚РѕСЂРѕР№ Р°РґСЂРµСЃ: ");
+        String secondIp = readIpAddress();
 
+        int firstIpIntegerValue = IPHelper.ipToInt(firstIp);
+        int secondIpIntegerValue = IPHelper.ipToInt(secondIp);
+        int minOfIpRange = Math.min(firstIpIntegerValue, secondIpIntegerValue);
+        int maxOfIpRange = Math.max(firstIpIntegerValue, secondIpIntegerValue);
+        while (minOfIpRange <= maxOfIpRange) {
+            String currentIp = IPHelper.intToIpStringView(minOfIpRange);
+            System.out.println(currentIp);
+            minOfIpRange++;
+        }
+    }
+
+    private static String readIpAddress() {
+        String ip = scanner.nextLine();
+        while (!IPHelper.isValidIp(ip)) {
+            System.out.println("Р’С‹ РІРІРµР»Рё IP-Р°РґСЂРµСЃ РЅРµ РІ РєРѕСЂСЂРµРєС‚РЅРѕРј С„РѕСЂРјР°С‚Рµ! Р’РІРѕРґРёС‚Рµ РІ С„РѕСЂРјР°С‚Рµ \"С…С…С….С…С…С….С…С…С….С…С…С…\"");
+            ip = scanner.nextLine();
+        }
+        return ip;
+    }
 }
